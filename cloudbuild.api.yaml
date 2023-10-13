@@ -1,0 +1,13 @@
+steps:
+- name: "gcr.io/cloud-builders/docker"
+  entrypoint: 'bash'
+  args:
+  - -c
+  - |
+    docker buildx build --no-cache -t gcr.io/ped-dev-308120/apigetpostri -f Dockerfile . --push
+    
+# gcloud auth revoke --all
+# gcloud auth login
+# gcloud config set project ped-dev-308120
+# gcloud builds submit --config cloudbuild.api.yaml .
+# gcloud run deploy apigetpostri --image gcr.io/ped-dev-308120/apigetpostri:latest
