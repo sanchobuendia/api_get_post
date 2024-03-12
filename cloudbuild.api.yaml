@@ -4,10 +4,10 @@ steps:
   args:
   - -c
   - |
-    docker buildx build --no-cache -t gcr.io/ped-dev-308120/apigetpostri -f Dockerfile . --push
+    docker buildx build --no-cache -t gcr.io/ped-dev-308120/emailtest -f Dockerfile . --push
     
 # gcloud auth revoke --all
 # gcloud auth login
 # gcloud config set project ped-dev-308120
 # gcloud builds submit --config cloudbuild.api.yaml .
-# gcloud run deploy apigetpostri --image gcr.io/ped-dev-308120/apigetpostri:latest
+# gcloud run deploy emailtest --image gcr.io/ped-dev-308120/emailtest:latest

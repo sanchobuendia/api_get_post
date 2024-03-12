@@ -1,10 +1,35 @@
 from flask import Flask, request, jsonify
+from google.appengine.api import wrap_wsgi_app
+from google.appengine.api.mail import send_mail
 import os
 
 app = Flask(__name__)
+app.wsgi_app = wrap_wsgi_app(app.wsgi_app)
 
-# Create a variable to store the posted dictionary
+# https://emailtest-2yhs5ice4q-tl.a.run.app/sendemail
 data_store = None
+
+@app.route("/")
+def hello():
+    return "Hello World!"
+
+@app.route("/sendemail")
+def sendMail():
+    send_mail(sender= "aureliano.paiva@grupofleury.com.br",
+                  to= "sanchobuendia@gmail.com",
+                  subject="Testing Python3 sending mails",
+                    body="""Dear Albert:
+    
+                        Your example.com account has been approved.  You can now visit
+                        http://www.example.com/ and sign in using your Google Account to
+                        access new features.
+    
+                        Please let us know if you have any questions.
+    
+                        The example.com Team
+                        """)
+
+    return "Mail was sent"
 
 @app.route('/api/post_dict', methods=['POST'])
 def post_data():
